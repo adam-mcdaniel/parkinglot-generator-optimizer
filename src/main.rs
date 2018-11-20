@@ -1,3 +1,5 @@
+use std::env;
+
 use std::fs::OpenOptions;
 use std::io::prelude::*;
 use std::thread;
@@ -14,16 +16,25 @@ use generate::parkinglot::*;
 #[allow(unused_assignments)]
 fn main() -> std::io::Result<()> {
 
-    let number_to_generate = 10;
+    let args: Vec<String> = env::args().collect();
+
+    if args.len() < 5 {
+        println!("Usage: './parkinglot WIDTH HEIGHT Y_POSITION_OF_EXITS_ON_LEFT&RIGHT PARKING_LOTS_TO_TEST'");
+        return Ok(());
+    }
+
+
+    let w = args[1].parse::<i32>().expect("Width of lot must be a 32 bit integer.");
+    let h = args[2].parse::<i32>().expect("Height of lot must be a 32 bit integer.");
+    let exit_y_pos = args[3].parse::<i32>().expect("Exit Y position must be a 32 bit integer.");
+    let number_to_generate = args[4].parse::<i32>().expect("Number of parkinglots to generate must be a 32 bit integer.");
+
 
     println!("
 Road:  ' '
 Space: '#'
 Exit:  '@'
 ");
-
-    let w = 15;
-    let h = 6;
 
 
 
@@ -35,9 +46,10 @@ Exit:  '@'
 
     let mut threads = vec![];
 
-    for _ in 0..number_to_generate {
+    for j in 0..number_to_generate {
         threads.push(thread::spawn(move || {
-            let mut lot = random_lot(vec![Pos(0, 1), Pos(w-1, 1)], w, h);
+            println!("thread {} started", j+1);
+            let mut lot = random_lot(vec![Pos(0, exit_y_pos), Pos(w-1, exit_y_pos)], w, h);
             lot = make_symmetrical_vertical(&lot);
             return optimize(&lot);
         }));
@@ -54,15 +66,15 @@ Exit:  '@'
         if new_score >= score {
             score = new_score;
             best_lot = lot;
-
-            let mut file = OpenOptions::new()
-                .create(true)
-                .append(true)
-                .open("threaded_designs.txt").unwrap();
-
-            file.write_all(best_lot.to_str().as_bytes())?;
-            file.flush()?;
         }
+
+        let mut file = OpenOptions::new()
+            .create(true)
+            .append(true)
+            .open("output/designs.txt").unwrap();
+
+        file.write_all(best_lot.to_str().as_bytes())?;
+        file.flush()?;
     }
 
 

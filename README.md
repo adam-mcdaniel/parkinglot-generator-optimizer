@@ -12,5 +12,7 @@ curl https://sh.rustup.rs -sSf | sh #install rust
 
 git clone https://github.com/adam-mcdaniel/parkinglot-generator-optimizer
 cd parkinglot-generator-optimizer
-cargo run
+cargo build --release
+
+./target/release/parking 10 10 5 10
 ```

@@ -56,7 +56,7 @@ pub fn optimize(lot: &ParkingLot) -> ParkingLot {
             no_improvement_counter = 0;
             score = newest_score;
             best_lot = new_lot.clone();
-            new_lot.show();
+            // new_lot.show();
 
         }
     }
