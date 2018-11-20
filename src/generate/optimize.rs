@@ -194,7 +194,7 @@ pub fn average_distance_from_exits(lot: &ParkingLot) -> i32 {
     let mut total_distance = 0;
     let mut i = 0;
 
-    let mut new_lot = lot.clone();
+    let new_lot = lot.clone();
     for y in 0..lot.h {
         for x in 0..lot.w {
             if lot.position(x, y) == EXIT {

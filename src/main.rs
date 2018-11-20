@@ -1,6 +1,5 @@
 use std::fs::OpenOptions;
 use std::io::prelude::*;
-use std::io::Error;
 use std::thread;
 
 
@@ -12,11 +11,8 @@ use generate::optimize::*;
 use generate::parkinglot::*;
 
 
+#[allow(unused_assignments)]
 fn main() -> std::io::Result<()> {
-    let number_of_designs_to_test = 1000;
-
-
-    let mut lot = ParkingLot::new(3, 3);
 
     println!("
 Road:  ' '
