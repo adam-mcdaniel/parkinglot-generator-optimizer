@@ -1,0 +1,8 @@
+[package]
+name = "parking"
+version = "0.1.0"
+authors = ["s777675"]
+
+[dependencies]
+pathfinding = "1.0"
+rand = "0.5.5"
