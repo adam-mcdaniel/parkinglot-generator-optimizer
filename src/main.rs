@@ -14,6 +14,8 @@ use generate::parkinglot::*;
 #[allow(unused_assignments)]
 fn main() -> std::io::Result<()> {
 
+    let number_to_generate = 10;
+
     println!("
 Road:  ' '
 Space: '#'
@@ -33,7 +35,7 @@ Exit:  '@'
 
     let mut threads = vec![];
 
-    for _ in 0..10 {
+    for _ in 0..number_to_generate {
         threads.push(thread::spawn(move || {
             let mut lot = random_lot(vec![Pos(0, 1), Pos(w-1, 1)], w, h);
             lot = make_symmetrical_vertical(&lot);
