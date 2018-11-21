@@ -5,7 +5,7 @@ A tool made to generate the best possible geometries for parking lots with speci
 
 PLGO creates random parkinglots with provided exits and dimensions, and uses multithreading to optimize each for the best flow rate and largest number of parking spots. It takes the current design at each iteration and does incremental improvements until the improvements stagnate, then it makes a large change to the parkinglot and starts the minor incremental improvements over. When the design has peaked, it compares it to the current best lot. If it is equal or better than the current best, it writes it to a save file. When all the threads are handled and terminated, the main thread is terminated.
 
-## Example Parkinglots
+## Example Optimization
 ```
 +---------------+
 |  ## ## ## ##  |
