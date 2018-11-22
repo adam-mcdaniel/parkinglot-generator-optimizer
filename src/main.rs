@@ -26,9 +26,8 @@ fn main() -> std::io::Result<()> {
 
     let w = args[1].parse::<i32>().expect("Width of lot must be a 32 bit integer.");
     let h = args[2].parse::<i32>().expect("Height of lot must be a 32 bit integer.");
-    let exit_y_pos = args[3].parse::<i32>().expect("Exit Y position must be a 32 bit integer.");
+    let exit_y_pos = args[3].parse::<i32>().expect("Exit Y position must be a 32 bit integer.") - 1;
     let number_to_generate = args[4].parse::<i32>().expect("Number of parkinglots to generate must be a 32 bit integer.");
-
 
 
     println!("

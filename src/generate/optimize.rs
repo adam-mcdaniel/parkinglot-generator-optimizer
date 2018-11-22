@@ -9,8 +9,11 @@ use generate::parkinglot::*;
 pub fn score_lot(lot: &ParkingLot) -> i32 {
     let mut score = 0;
 
-    let spaces = filter_crowded_lot(&lot).get_spaces().len() as i32;
-    let average_distance_from_exits = average_distance_from_exits(&lot);
+    let spaces = filter_crowded_lot(&lot)
+                    .get_spaces()
+                    .len() as i32;
+    let average_distance_from_exits = 
+        average_distance_from_exits(&lot);
 
     for exit in lot.get_exits() {
         let Pos(x, y) = exit;
